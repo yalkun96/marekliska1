@@ -1,0 +1,49 @@
+{% extends 'django_five/main.html' %}
+{% load static %}
+
+
+{% block header %}
+  <header class="masthead" style="background-image: url('{% static 'django_five/images/home-bg.jpg' %}');">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Home</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="home-card">
+                    <h1>{{ post.title }}</h1>
+                </div>
+                <p>{{ post.content }}</p>
+            {% if user.is_authenticated %}
+
+                    <a href="{% url 'leave_comment' %}">Leave your comment</a>
+
+            {% endif %}
+    </div>
+    </div>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+
+
+                {% for review in review %}
+                    <div class="home-card">
+                        <p class="small text-muted fst-italic">User: {{ user.username }}</p>
+                        <p class="small text-muted fst-italic">Comment: {{ review.comment }}</p>
+                        <p class="small text-muted fst-italic">Date of comment: {{ review.date }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}
